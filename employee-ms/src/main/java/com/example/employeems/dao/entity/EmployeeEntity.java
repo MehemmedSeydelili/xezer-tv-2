@@ -10,10 +10,14 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "employees")
 public class EmployeeEntity {
 
@@ -32,9 +36,15 @@ public class EmployeeEntity {
 
     private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     private String address;
 
     private Double salary;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -45,22 +55,25 @@ public class EmployeeEntity {
     private LocalDateTime updatedAt;
 
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
-    @JsonIgnore
+    private PositionEntity position;
+
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
-    private PositionEntity position;*/
+    private Set<ExperienceEntity> experiences;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeEntity that = (EmployeeEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(birthDate, that.birthDate) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(salary, that.salary) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return id!= null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, birthDate, email, address, salary, createdAt, updatedAt);
+        return getId().hashCode();
     }
 }
