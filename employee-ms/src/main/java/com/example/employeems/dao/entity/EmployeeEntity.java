@@ -49,9 +49,9 @@ public class EmployeeEntity {
     private Long positionId;
 
 
-    /*@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
-    @ToString.Exclude
-    private PositionEntity position;*/
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @ToString.Exclude
+//    private PositionEntity position;
 
 }
