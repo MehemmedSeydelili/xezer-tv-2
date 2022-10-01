@@ -1,20 +1,19 @@
 package com.example.employeems.dao.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "employees")
@@ -35,23 +34,44 @@ public class EmployeeEntity {
 
     private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     private String address;
 
     private Double salary;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "position_id")
-    private Long positionId;
+    @ManyToOne
+    @JoinColumn(name = "position_id", referencedColumnName = "id")
+    private PositionEntity position;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Set<ExperienceEntity> experiences;
 
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @ToString.Exclude
-//    private PositionEntity position;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        EmployeeEntity that = (EmployeeEntity) o;
+        return id != null && id.equals(that.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }
