@@ -1,6 +1,6 @@
 package com.example.employeems.controller;
 
-import com.example.employeems.entity.Department;
+import com.example.employeems.dao.entity.DepartmentEntity;
 import com.example.employeems.model.dto.DepartmentDto;
 import com.example.employeems.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,12 @@ public class DepartmentController {
     private final DepartmentService departmentservice;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Department> createDepartment(@RequestBody DepartmentDto departmentDto) {
+    public ResponseEntity<DepartmentEntity> createDepartment(@RequestBody DepartmentDto departmentDto) {
         return ResponseEntity.status(HttpStatus.OK).body(departmentservice.createDepartment(departmentDto));
     }
 
     @GetMapping("/{departmentId}")
-    public ResponseEntity<Department> getById(@PathVariable("departmentId") long id) {
+    public ResponseEntity<DepartmentEntity> getById(@PathVariable("departmentId") long id) {
         return ResponseEntity.status(HttpStatus.OK).body(departmentservice.findById(id));
     }
 }
