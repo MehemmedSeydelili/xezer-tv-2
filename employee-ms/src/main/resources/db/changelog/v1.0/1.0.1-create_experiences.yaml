@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      author: Ibrahim Nazarov
+      id: create experiences table
+      changes:
+        - createTable:
+            tableName: experinces
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_experience_to_employee
+                    references: employees(id)
+                    nullable: false
+              - column:
+                  name: workplace
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: position
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: timestamp
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
