@@ -1,6 +1,5 @@
 package com.example.employeems.service.impl;
 
-import com.example.employeems.exception.EmployeeNotFoundException;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
 import com.example.employeems.repository.EmployeeRepository;
