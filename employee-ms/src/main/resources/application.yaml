@@ -10,7 +10,7 @@ feign:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_CONNECTION_IP:localhost}:5432/employee-ms
+    url: jdbc:postgresql://${DB_CONNECTION_IP:localhost}:3306/employee-ms
     username: postgres
     password: root
 
