@@ -12,5 +12,6 @@ public class EmployeeView implements Serializable {
     private final LocalDate birthDate;
     private final String mobilePhone;
     private final String address;
+    private final Double salary;
 
 }
