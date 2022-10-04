@@ -5,7 +5,7 @@ import com.example.employeems.model.dto.ExperienceDto;
 
 public class ExperienceMapper {
 
-    public static ExperienceEntity entityToDto(ExperienceDto dto) {
+    public static ExperienceEntity dtoToEntity(ExperienceDto dto) {
         return ExperienceEntity.builder()
                                .workplace(dto.getWorkplace())
                                .position(dto.getPosition())

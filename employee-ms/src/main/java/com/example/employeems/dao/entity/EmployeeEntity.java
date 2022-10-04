@@ -56,7 +56,7 @@ public class EmployeeEntity {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private PositionEntity position;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<ExperienceEntity> experiences;
 

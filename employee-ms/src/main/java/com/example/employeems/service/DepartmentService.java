@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 
 public class DepartmentService {
  private final DepartmentRepository departmentRepository;
-  public DepartmentEntity createDepartment(DepartmentDto departmentDto){
-      DepartmentEntity department= new DepartmentEntity();
-      department.setdepartmentname(departmentDto.getdepartmentname());
-      return departmentRepository.save(department);
-  }
+
+//  public DepartmentEntity createDepartment(DepartmentDto departmentDto){
+//      DepartmentEntity department= new DepartmentEntity();
+//      department.setdepartmentname(departmentDto.getdepartmentname());
+//      return departmentRepository.save(department);
+//  }
   public DepartmentEntity findById(Long id){
       return departmentRepository.findById(id).get();
   }

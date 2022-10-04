@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class DepartmentController {
     private final DepartmentService departmentservice;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<DepartmentEntity> createDepartment(@RequestBody DepartmentDto departmentDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentservice.createDepartment(departmentDto));
-    }
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity<DepartmentEntity> createDepartment(@RequestBody DepartmentDto departmentDto) {
+//        return ResponseEntity.status(HttpStatus.OK).body(departmentservice.createDepartment(departmentDto));
+//    }
 
     @GetMapping("/{departmentId}")
     public ResponseEntity<DepartmentEntity> getById(@PathVariable("departmentId") long id) {

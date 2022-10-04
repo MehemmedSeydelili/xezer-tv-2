@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ExperienceEntity {
 
     @Id
