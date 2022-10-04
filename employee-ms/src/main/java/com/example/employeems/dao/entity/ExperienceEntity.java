@@ -16,12 +16,14 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class ExperienceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "employee_id")
+    private Long employeeId;
 
     private String workplace;
 
