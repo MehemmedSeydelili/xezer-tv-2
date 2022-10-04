@@ -52,13 +52,13 @@ public class EmployeeEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "position_id", referencedColumnName = "id")
-    private PositionEntity position;
+//    @ManyToOne
+//    @JoinColumn(name = "position_id", referencedColumnName = "id")
+//    private PositionEntity position;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private Set<ExperienceEntity> experiences;
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @ToString.Exclude
+//    private Set<ExperienceEntity> experiences;
 
     @Override
     public boolean equals(Object o) {
