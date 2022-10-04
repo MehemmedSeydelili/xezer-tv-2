@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class PositionDto {
+public class PositionDto implements Serializable {
     private long id;
+    @NotEmpty(message = "Position name can't be empty")
     private String name;
     private long departmentId;
 }
