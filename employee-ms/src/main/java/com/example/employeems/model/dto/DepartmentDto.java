@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class DepartmentDto implements Serializable {
     private long id;
     @NotEmpty(message = "First name can't be empty")
-    private String departmentname;
+    private String name;
 
 
 
