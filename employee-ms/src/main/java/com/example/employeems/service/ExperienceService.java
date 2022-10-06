@@ -2,7 +2,7 @@ package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.ExperienceEntity;
 import com.example.employeems.model.exception.NotFoundException;
-import com.example.employeems.repository.ExperienceRepository;
+import com.example.employeems.dao.repository.ExperienceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

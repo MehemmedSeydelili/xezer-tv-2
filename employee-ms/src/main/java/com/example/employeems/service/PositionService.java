@@ -2,7 +2,7 @@ package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.PositionEntity;
 import com.example.employeems.model.dto.PositionDto;
-import com.example.employeems.repository.PositionRepository;
+import com.example.employeems.dao.repository.PositionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

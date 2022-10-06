@@ -1,4 +1,4 @@
-package com.example.employeems.repository;
+package com.example.employeems.dao.repository;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

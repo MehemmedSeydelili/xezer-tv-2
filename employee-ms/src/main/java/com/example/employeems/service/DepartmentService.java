@@ -1,8 +1,7 @@
 package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.DepartmentEntity;
-import com.example.employeems.model.dto.DepartmentDto;
-import com.example.employeems.repository.DepartmentRepository;
+import com.example.employeems.dao.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

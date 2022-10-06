@@ -2,7 +2,7 @@ package com.example.employeems.service;
 
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
-import com.example.employeems.repository.EmployeeRepository;
+import com.example.employeems.dao.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
