@@ -17,6 +17,12 @@ public class ExperienceService {
 
     private final ExperienceRepository repository;
 
+    public void deleteExperience(Long id) {
+
+        repository.delete(fetcExperienceIfExist(id));
+
+    }
+
     private ExperienceEntity fetcExperienceIfExist(Long id) {
         return repository.findById(id).orElseThrow(() -> {
             log.error("ExperienceService.fetcExperienceIfExist.error id: {}", id);
