@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.TreeSet;
+import java.util.List;
 
 import static com.example.employeems.model.constant.ExceptionConstants.EXPERIENCE_NOT_FOUND_CODE;
 import static com.example.employeems.model.constant.ExceptionConstants.EXPERIENCE_NOT_FOUND_MESSAGE;
@@ -22,9 +22,9 @@ public class ExperienceService {
     private final ExperienceRepository repository;
     private final EmployeeService employeeService;
 
-    public TreeSet<ExperienceEntity> getAllExperiences() {
-
-        return null;
+    public List<ExperienceEntity> getAllExperiences(Long employeeId) {
+        log.info("ExperienceService.getAllExperiences.start");
+        return repository.findAllByEmployeeIdOrderByStartDateDesc(employeeId);
     }
 
     public void createExperience(Long employeeId, ExperienceDto experienceDto) {

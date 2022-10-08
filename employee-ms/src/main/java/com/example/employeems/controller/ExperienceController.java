@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,8 +18,8 @@ public class ExperienceController {
     private final ExperienceService service;
 
     @GetMapping("{employeeId}")
-    public Set<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
-        return null;
+    public List<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
+        return service.getAllExperiences(employeeId);
     }
 
     @PostMapping("{employeeId}")
