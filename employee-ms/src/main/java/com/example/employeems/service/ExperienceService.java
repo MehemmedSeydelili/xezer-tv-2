@@ -1,11 +1,15 @@
 package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.ExperienceEntity;
-import com.example.employeems.model.exception.NotFoundException;
 import com.example.employeems.dao.repository.ExperienceRepository;
+import com.example.employeems.mapper.ExperienceMapper;
+import com.example.employeems.model.dto.ExperienceDto;
+import com.example.employeems.model.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.TreeSet;
 
 import static com.example.employeems.model.constant.ExceptionConstants.EXPERIENCE_NOT_FOUND_CODE;
 import static com.example.employeems.model.constant.ExceptionConstants.EXPERIENCE_NOT_FOUND_MESSAGE;
@@ -16,11 +20,28 @@ import static com.example.employeems.model.constant.ExceptionConstants.EXPERIENC
 public class ExperienceService {
 
     private final ExperienceRepository repository;
+    private final EmployeeService employeeService;
+
+    public TreeSet<ExperienceEntity> getAllExperiences() {
+
+        return null;
+    }
+
+    public void createExperience(Long employeeId, ExperienceDto experience) {
+        log.info("ExperienceService.createExperience.start");
+        if (employeeService.getEmployeeById(employeeId) != null) {
+            log.info("ExperienceService.createExperience.if-case");
+            var experienceEntity = ExperienceMapper.dtoToEntity(experience);
+            experienceEntity.setEmployeeId(employeeId);
+            repository.save(experienceEntity);
+        }
+        log.info("ExperienceService.createExperience.end");
+    }
 
     public void deleteExperience(Long id) {
-
+        log.info("ExperienceService.deleteExperience.start");
         repository.delete(fetcExperienceIfExist(id));
-
+        log.info("ExperienceService.deleteExperience.end");
     }
 
     private ExperienceEntity fetcExperienceIfExist(Long id) {

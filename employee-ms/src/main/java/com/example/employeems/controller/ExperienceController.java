@@ -22,10 +22,11 @@ public class ExperienceController {
         return null;
     }
 
-    @PostMapping
+    @PostMapping("{employeeId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createExperience(@Valid @RequestBody ExperienceDto experience) {
-
+    public void createExperience(@PathVariable(name = "employeeId") Long employeeId,
+                                 @Valid @RequestBody ExperienceDto experience) {
+        service.createExperience(employeeId, experience);
     }
 
     @PutMapping("{id}")
