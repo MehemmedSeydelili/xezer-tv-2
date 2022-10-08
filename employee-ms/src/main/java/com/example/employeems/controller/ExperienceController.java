@@ -17,28 +17,28 @@ public class ExperienceController {
 
     private final ExperienceService service;
 
-    @GetMapping("{employeeId}")
+    @GetMapping("/{employeeId}")
     public List<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
         return service.getAllExperiences(employeeId);
     }
 
-    @PostMapping("{employeeId}")
+    @PostMapping("/{employeeId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void createExperience(@PathVariable(name = "employeeId") Long employeeId,
                                  @Valid @RequestBody ExperienceDto experience) {
         service.createExperience(employeeId, experience);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ExperienceEntity updateExperience(@PathVariable Long id, @RequestBody ExperienceDto experience) {
+    public ExperienceEntity updateExperience(@PathVariable(value = "id") Long id,
+                                             @RequestBody ExperienceDto experience) {
         return service.updateExperience(id, experience);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteExperience(Long id) {
-
+    public void deleteExperience(@PathVariable(value = "id") Long id) {
         service.deleteExperience(id);
     }
 

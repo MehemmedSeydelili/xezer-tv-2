@@ -36,7 +36,9 @@ public class ExperienceService {
             repository.save(experienceEntity);
         }
         log.info("ExperienceService.createExperience.end");
+
     }
+
 
     public ExperienceEntity updateExperience(Long id, ExperienceDto experienceDto) {
         log.info("ExperienceService.updateExperience.start");
@@ -52,14 +54,17 @@ public class ExperienceService {
 
     public void deleteExperience(Long id) {
         log.info("ExperienceService.deleteExperience.start");
-        repository.delete(fetcExperienceIfExist(id));
+        repository.deleteById(id);
+
         log.info("ExperienceService.deleteExperience.end");
     }
 
     private ExperienceEntity fetcExperienceIfExist(Long id) {
-        return repository.findById(id).orElseThrow(() -> {
-            log.error("ExperienceService.fetcExperienceIfExist.error id: {}", id);
-            throw new NotFoundException(EXPERIENCE_NOT_FOUND_CODE, String.format(EXPERIENCE_NOT_FOUND_MESSAGE, id));
-        });
+        return repository.findById(id)
+                         .orElseThrow(() -> {
+                             log.error("ExperienceService.fetcExperienceIfExist.error id: {}", id);
+                             throw new NotFoundException(EXPERIENCE_NOT_FOUND_CODE,
+                                                         String.format(EXPERIENCE_NOT_FOUND_MESSAGE, id));
+                         });
     }
 }

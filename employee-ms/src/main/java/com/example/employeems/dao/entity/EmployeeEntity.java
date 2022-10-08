@@ -8,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Setter
@@ -58,7 +58,7 @@ public class EmployeeEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
-    private Set<ExperienceEntity> experiences;
+    private List<ExperienceEntity> experiences;
 
     @Override
     public boolean equals(Object o) {
