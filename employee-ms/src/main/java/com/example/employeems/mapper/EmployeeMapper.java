@@ -1,11 +1,15 @@
 package com.example.employeems.mapper;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
+import com.example.employeems.dao.entity.PositionEntity;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class EmployeeMapper {
-    public  EmployeeEntity dtoToEntity(EmployeeDto employeeDto){
+    public static EmployeeEntity dtoToEntity(EmployeeDto employeeDto, PositionEntity position){
         return EmployeeEntity.builder()
                 .firstName(employeeDto.getFirstName())
                 .lastName(employeeDto.getLastName())
@@ -13,11 +17,13 @@ public class EmployeeMapper {
                 .email(employeeDto.getEmail())
                 .address(employeeDto.getAddress())
                 .salary(employeeDto.getSalary())
+                .position(position)
                 .build();
     }
 
-    public EmployeeView entityToView(EmployeeEntity employee){
+    public static EmployeeView entityToView(EmployeeEntity employee){
         return EmployeeView.builder()
+                .id(employee.getId())
                 .firstName(employee.getFirstName())
                 .lastName(employee.getLastName())
                 .birthDate(employee.getBirthDate())
@@ -26,5 +32,11 @@ public class EmployeeMapper {
                 .salary(employee.getSalary())
                 .build();
 
+    }
+
+    public static Set<EmployeeView> entityToViewList(Set<EmployeeEntity> entities){
+        return entities.stream()
+                .map(EmployeeMapper::entityToView)
+                .collect(Collectors.toSet());
     }
 }
