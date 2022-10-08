@@ -1,6 +1,7 @@
 package com.example.employeems.controller;
 
 import com.example.employeems.model.dto.ExceptionDto;
+import com.example.employeems.model.exception.AlreadyExistException;
 import com.example.employeems.model.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,11 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return new ExceptionDto(ex.getCode(), ex.getMessage());
     }
 
+    @ExceptionHandler(AlreadyExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDto handle(AlreadyExistException ex){
+        log.error("AlreadyExistException ", ex);
+        return new ExceptionDto(ex.getCode(), ex.getMessage());
+    }
 
 }
