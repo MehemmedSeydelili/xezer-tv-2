@@ -1,17 +1,23 @@
 package com.example.employeems.model.view;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class EmployeeView implements Serializable {
-    private final String firstName;
-    private final String lastName;
-    private final LocalDate birthDate;
-    private final String mobilePhone;
-    private final String address;
-    private final Double salary;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeView {
+    private  Long id;
+    private  String firstName;
+    private  String lastName;
+    private  LocalDate birthDate;
+    private  String mobilePhone;
+    private  String address;
+    private  Double salary;
 
 }
