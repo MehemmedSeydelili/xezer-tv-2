@@ -42,10 +42,11 @@ public class EmployeeService {
     }
 
     public EmployeeDto createEmployee(EmployeeDto employeeDto, Long positionId) {
-          PositionEntity positionEntity= positionService.getPosition(positionId);
+          /*PositionEntity positionEntity= positionService.getPosition(positionId);
           EmployeeMapper.dtoToEntity(employeeDto,positionEntity);
 
-          return employeeDto;
+          return employeeDto;*/
+        return null;
     }
 
     public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
