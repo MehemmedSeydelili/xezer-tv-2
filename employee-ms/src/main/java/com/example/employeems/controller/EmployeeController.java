@@ -27,9 +27,9 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployee(id));
     }
 
-    @PostMapping
-        public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDto));
+    @PostMapping("{positionId}")
+        public ResponseEntity<EmployeeDto> createEmployee(@PathVariable(name = "positionId") Long positionId,@RequestBody EmployeeDto employeeDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDto,positionId));
     }
 
     @PutMapping("{id}")
