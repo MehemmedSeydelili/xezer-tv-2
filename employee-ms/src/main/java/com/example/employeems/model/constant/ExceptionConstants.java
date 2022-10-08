@@ -16,6 +16,6 @@ public final class ExceptionConstants {
     public static final String EXPERIENCE_NOT_FOUND_MESSAGE = "Experience with id: %s not found";
 
     public static final String EMPLOYEE_ALREADY_EXIST_CODE = "EMPLOYEE_ALREADY_EXIST";
-    public static final String EMPLOYEE_ALREADY_EXIST_MESSAGE = "EMPLOYEE_ALREADY_EXIST";
+    public static final String EMPLOYEE_ALREADY_EXIST_MESSAGE = "Employee with this email: %s already exist";
 
 }
