@@ -27,15 +27,27 @@ public class ExperienceService {
         return null;
     }
 
-    public void createExperience(Long employeeId, ExperienceDto experience) {
+    public void createExperience(Long employeeId, ExperienceDto experienceDto) {
         log.info("ExperienceService.createExperience.start");
-        if (employeeService.getEmployeeById(employeeId) != null) {
+        if (employeeService.getEmployee(employeeId) != null) {
             log.info("ExperienceService.createExperience.if-case");
-            var experienceEntity = ExperienceMapper.dtoToEntity(experience);
+            var experienceEntity = ExperienceMapper.dtoToEntity(experienceDto);
             experienceEntity.setEmployeeId(employeeId);
             repository.save(experienceEntity);
         }
         log.info("ExperienceService.createExperience.end");
+    }
+
+    public ExperienceEntity updateExperience(Long id, ExperienceDto experienceDto) {
+        log.info("ExperienceService.updateExperience.start");
+        var experience = fetcExperienceIfExist(id);
+        experience.setWorkplace(experienceDto.getWorkplace());
+        experience.setPosition(experienceDto.getPosition());
+        experience.setStartDate(experienceDto.getStartDate());
+        experience.setEndDate(experienceDto.getEndDate());
+        repository.save(experience);
+        log.info("ExperienceService.updateExperience.end");
+        return experience;
     }
 
     public void deleteExperience(Long id) {

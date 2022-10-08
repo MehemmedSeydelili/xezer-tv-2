@@ -18,7 +18,7 @@ public class ExperienceController {
     private final ExperienceService service;
 
     @GetMapping("{employeeId}")
-    public Set<ExperienceEntity> getExperiences(@PathVariable(name = "employeeId") Long employeeId) {
+    public Set<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class ExperienceController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ExperienceEntity updateExperience(@PathVariable Long id, @RequestBody ExperienceDto experience) {
-        return null;
+        return service.updateExperience(id, experience);
     }
 
     @DeleteMapping("{id}")
