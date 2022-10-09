@@ -36,7 +36,7 @@ public class EmployeeService {
         return EmployeeMapper.entityToView(fetchEmployeeIfExist(id));
     }
 
-    public Set<EmployeeView> getAll() {
+    public Set<EmployeeView> getAllEmployees() {
         Set<EmployeeEntity> employees = employeeRepository.findAllByDeletedIsFalse();
         return EmployeeMapper.entityToViewList(employees);
     }

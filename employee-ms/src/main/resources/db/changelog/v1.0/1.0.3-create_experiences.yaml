@@ -4,7 +4,7 @@ databaseChangeLog:
       id: create experiences table
       changes:
         - createTable:
-            tableName: experinces
+            tableName: experiences
             columns:
               - column:
                   name: id

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,28 +17,28 @@ public class ExperienceController {
 
     private final ExperienceService service;
 
-    @GetMapping("{employeeId}")
-    public Set<ExperienceEntity> getExperiences(@PathVariable(name = "employeeId") Long employeeId) {
-        return null;
+    @GetMapping("/{employeeId}")
+    public List<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
+        return service.getAllExperiences(employeeId);
     }
 
-    @PostMapping("{employeeId}")
+    @PostMapping("/{employeeId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void createExperience(@PathVariable(name = "employeeId") Long employeeId,
                                  @Valid @RequestBody ExperienceDto experience) {
         service.createExperience(employeeId, experience);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ExperienceEntity updateExperience(@PathVariable Long id, @RequestBody ExperienceDto experience) {
-        return null;
+    public ExperienceEntity updateExperience(@PathVariable(value = "id") Long id,
+                                             @RequestBody ExperienceDto experience) {
+        return service.updateExperience(id, experience);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteExperience(Long id) {
-
+    public void deleteExperience(@PathVariable(value = "id") Long id) {
         service.deleteExperience(id);
     }
 

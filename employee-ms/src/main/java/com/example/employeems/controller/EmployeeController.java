@@ -18,8 +18,8 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     @GetMapping
-    public ResponseEntity<Set<EmployeeView>> getAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAll());
+    public ResponseEntity<Set<EmployeeView>> getEmployees(){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAllEmployees());
     }
 
     @GetMapping("/{id}")
