@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity,Long> {
     List<DepartmentEntity> findDepartmentById(Long id);
+
+    List<DepartmentEntity> findAllDepartmentsById(long id);
 }
