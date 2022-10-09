@@ -1,6 +1,7 @@
 package com.example.employeems.dao.entity;
 
 
+import com.example.employeems.model.enums.Gender;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,6 +29,9 @@ public class EmployeeEntity {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
