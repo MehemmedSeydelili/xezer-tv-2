@@ -22,6 +22,11 @@ databaseChangeLog:
                   name: last_name
                   type: varchar(256)
               - column:
+                  name: gender
+                  type: varchar(6)
+                  constraints:
+                    nullable: false
+              - column:
                   name: email
                   type: varchar(256)
                   constraints:
