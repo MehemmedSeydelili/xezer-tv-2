@@ -1,7 +1,6 @@
 package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
-import com.example.employeems.dao.entity.PositionEntity;
 import com.example.employeems.mapper.EmployeeMapper;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.exception.NotFoundException;
@@ -11,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.example.employeems.model.constant.ExceptionConstants.*;
 
@@ -41,23 +38,27 @@ public class EmployeeService {
         return EmployeeMapper.entityToViewList(employees);
     }
 
-    public EmployeeDto createEmployee(EmployeeDto employeeDto, Long positionId) {
-          /*PositionEntity positionEntity= positionService.getPosition(positionId);
-          EmployeeMapper.dtoToEntity(employeeDto,positionEntity);
+    public void createEmployee(EmployeeDto employeeDto, Long positionId) {
 
-          return employeeDto;*/
-         return null;
+        EmployeeEntity employees;
+        if (positionService.findbyId(positionId) != null) {
+            employees = EmployeeMapper.dtoToEntity(employeeDto);
+            employees.setPositionId(positionId);
+            employeeRepository.save(employees);
+        }
     }
 
-    public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
-        return null;
+    public EmployeeEntity updateEmployee(Long id, EmployeeDto employeeDto) {
+
+        EmployeeEntity employee = fetchEmployeeIfExist(id);
+        EmployeeMapper.dtoToEntity(employeeDto);
+        return employeeRepository.save(employee);
+
     }
 
     public void deleteEmployee(Long id) {
-        EmployeeEntity entity = fetchEmployeeIfExist(id);
-        entity.setIsDeleted(true);
-        employeeRepository.save(entity);
+        fetchEmployeeIfExist(id);
+        employeeRepository.deleteById(id);
     }
-
 }
 
