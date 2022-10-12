@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EmployeeMapper {
-    public static EmployeeEntity dtoToEntity(EmployeeDto employeeDto, PositionEntity position){
+    public static EmployeeEntity dtoToEntity(EmployeeDto employeeDto){
         return EmployeeEntity.builder()
                 .firstName(employeeDto.getFirstName())
                 .lastName(employeeDto.getLastName())
@@ -18,7 +18,6 @@ public class EmployeeMapper {
                 .email(employeeDto.getEmail())
                 .address(employeeDto.getAddress())
                 .salary(employeeDto.getSalary())
-                .position(position)
                 .build();
     }
 
