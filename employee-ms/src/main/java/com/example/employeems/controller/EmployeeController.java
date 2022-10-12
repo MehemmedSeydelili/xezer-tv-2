@@ -1,5 +1,6 @@
 package com.example.employeems.controller;
 
+import com.example.employeems.dao.entity.EmployeeEntity;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
 import com.example.employeems.service.EmployeeService;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -28,17 +28,19 @@ public class EmployeeController {
     }
 
     @PostMapping("{positionId}")
-        public ResponseEntity<EmployeeDto> createEmployee(@PathVariable(name = "positionId") Long positionId,@RequestBody EmployeeDto employeeDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDto,positionId));
+    @ResponseStatus(HttpStatus.CREATED)
+        public void createEmployee(@PathVariable(name = "positionId") Long positionId,
+                                                          @RequestBody EmployeeDto employeeDto){
+         employeeService.createEmployee(employeeDto,positionId);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EmployeeDto> updpate(@PathVariable("id") Long id , @RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<EmployeeEntity> updpate(@PathVariable("id") Long id , @RequestBody EmployeeDto employeeDto){
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(id,employeeDto));
     }
 
     @DeleteMapping("{id}")
-    public void delete(Long id){
+    public void delete(@PathVariable("id") Long id){
         employeeService.deleteEmployee(id);
     }
 
