@@ -56,6 +56,9 @@ public class EmployeeEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "position_id")
+    private Long positionId;
+
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private PositionEntity position;
