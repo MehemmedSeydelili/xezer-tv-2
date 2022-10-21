@@ -1,6 +1,8 @@
 package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
+import com.example.employeems.dao.entity.PositionEntity;
+import com.example.employeems.dao.repository.PositionRepository;
 import com.example.employeems.mapper.EmployeeMapper;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.exception.NotFoundException;
@@ -20,7 +22,7 @@ import static com.example.employeems.model.constant.ExceptionConstants.*;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final PositionService positionService;
+    private final PositionRepository positionRepository;
 
     private EmployeeEntity fetchEmployeeIfExist(Long id) {
         return employeeRepository.findByIdAndIsDeletedFalse(id).orElseThrow(() -> {
@@ -38,22 +40,27 @@ public class EmployeeService {
         return EmployeeMapper.entityToViewList(employees);
     }
 
-    public void createEmployee(EmployeeDto employeeDto, Long positionId) {
+    public EmployeeView createEmployee(EmployeeDto employeeDto) {
 
-        EmployeeEntity employees;
-        if (positionService.findbyId(positionId) != null) {
-            employees = EmployeeMapper.dtoToEntity(employeeDto);
-            employees.setPositionId(positionId);
-            employeeRepository.save(employees);
-        }
+        PositionEntity position = positionRepository.findById(employeeDto.getPositionId()).orElseThrow(() -> {
+            throw new NotFoundException(POSITION_NOT_FOUND_CODE, String.format(POSITION_NOT_FOUND_MESSAGE));
+        });
+
+        EmployeeEntity employees = EmployeeMapper.dtoToEntity(employeeDto);
+        employees.setPosition(position);
+        employees.setPositionId(position.getId());
+        employeeRepository.save(employees);
+
+        return EmployeeMapper.entityToView(employees);
     }
 
-    public EmployeeEntity updateEmployee(Long id, EmployeeDto employeeDto) {
+    public EmployeeView updateEmployee(Long id, EmployeeDto employeeDto) {
 
-        EmployeeEntity employee = fetchEmployeeIfExist(id);
-        EmployeeMapper.dtoToEntity(employeeDto);
-        return employeeRepository.save(employee);
+        fetchEmployeeIfExist(id);
 
+        EmployeeEntity employee = EmployeeMapper.dtoToEntity(employeeDto);
+        employeeRepository.save(employee);
+        return EmployeeMapper.entityToView(employee);
     }
 
     public void deleteEmployee(Long id) {
