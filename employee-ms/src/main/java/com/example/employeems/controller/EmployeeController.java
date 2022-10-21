@@ -28,14 +28,13 @@ public class EmployeeController {
     }
 
     @PostMapping("{positionId}")
-    @ResponseStatus(HttpStatus.CREATED)
-        public void createEmployee(@PathVariable(name = "positionId") Long positionId,
+        public ResponseEntity<EmployeeView> createEmployee(/*@PathVariable(name = "positionId") Long positionId,*/
                                                           @RequestBody EmployeeDto employeeDto){
-         employeeService.createEmployee(employeeDto,positionId);
+         return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employeeDto));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EmployeeEntity> updpate(@PathVariable("id") Long id , @RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<EmployeeView> updpate(@PathVariable("id") Long id , @RequestBody EmployeeDto employeeDto){
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(id,employeeDto));
     }
 
