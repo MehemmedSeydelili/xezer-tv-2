@@ -1,7 +1,6 @@
 package com.example.employeems.mapper;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
-import com.example.employeems.dao.entity.PositionEntity;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
 
@@ -11,11 +10,13 @@ import java.util.stream.Collectors;
 public class EmployeeMapper {
     public static EmployeeEntity dtoToEntity(EmployeeDto employeeDto){
         return EmployeeEntity.builder()
+                .id(employeeDto.getId())
                 .firstName(employeeDto.getFirstName())
                 .lastName(employeeDto.getLastName())
                 .gender(employeeDto.getGender())
                 .birthDate(employeeDto.getBirthDate())
                 .email(employeeDto.getEmail())
+                .phoneNumber(employeeDto.getPhoneNumber())
                 .address(employeeDto.getAddress())
                 .salary(employeeDto.getSalary())
                 .build();
@@ -28,9 +29,10 @@ public class EmployeeMapper {
                 .lastName(employee.getLastName())
                 .gender(employee.getGender())
                 .birthDate(employee.getBirthDate())
-                .mobilePhone(employee.getPhoneNumber())
+                .phoneNumber(employee.getPhoneNumber())
                 .address(employee.getAddress())
                 .salary(employee.getSalary())
+                .positionId(employee.getPositionId())
                 .build();
 
     }
