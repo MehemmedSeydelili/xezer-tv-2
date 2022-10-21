@@ -18,8 +18,8 @@ public class EmployeeView {
     private  String lastName;
     private  Gender gender;
     private  LocalDate birthDate;
-    private  String mobilePhone;
+    private  String phoneNumber;
     private  String address;
     private  Double salary;
-
+    private  Long positionId;
 }
