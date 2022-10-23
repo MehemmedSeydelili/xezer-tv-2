@@ -22,7 +22,7 @@ public class ExperienceService {
     private final ExperienceRepository repository;
     private final EmployeeService employeeService;
 
-    public List<ExperienceEntity> getAllExperiences(Long employeeId) {
+    public List<ExperienceEntity> getExperiencesByEmployee(Long employeeId) {
         log.info("ExperienceService.getAllExperiences.start");
         return repository.findAllByEmployeeIdOrderByStartDateDesc(employeeId);
     }
@@ -38,7 +38,6 @@ public class ExperienceService {
         log.info("ExperienceService.createExperience.end");
 
     }
-
 
     public ExperienceEntity updateExperience(Long id, ExperienceDto experienceDto) {
         log.info("ExperienceService.updateExperience.start");

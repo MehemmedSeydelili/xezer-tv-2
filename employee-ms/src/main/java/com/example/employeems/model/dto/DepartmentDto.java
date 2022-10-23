@@ -1,20 +1,13 @@
 package com.example.employeems.model.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
 @Data
-public class DepartmentDto implements Serializable {
-    private long id;
-    @NotEmpty(message = "First name can't be empty")
+public class DepartmentDto {
+
+    @NotBlank(message = "Department must not be null and must contain at least one non-whitespace character")
     private String name;
-
-
-
-
 
 }

@@ -26,7 +26,7 @@ public class PositionEntity {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private DepartmentEntity department;
 
-    @OneToMany(mappedBy = "id" ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     @ToString.Exclude
     private Set<EmployeeEntity> employees;
 
@@ -47,11 +47,11 @@ public class PositionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PositionEntity that = (PositionEntity) o;
-        return id.equals(that.id);
+        return this.name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.name);
     }
 }

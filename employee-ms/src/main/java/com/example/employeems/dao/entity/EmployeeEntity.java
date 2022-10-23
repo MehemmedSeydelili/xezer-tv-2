@@ -1,7 +1,6 @@
 package com.example.employeems.dao.entity;
 
 
-import com.example.employeems.model.enums.Gender;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Setter
@@ -30,8 +30,7 @@ public class EmployeeEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String gender;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
@@ -56,8 +55,6 @@ public class EmployeeEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "position_id")
-    private Long positionId;
 
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
@@ -74,11 +71,11 @@ public class EmployeeEntity {
         if (o == null || getClass() != o.getClass())
             return false;
         EmployeeEntity that = (EmployeeEntity) o;
-        return id != null && id.equals(that.id);
+        return this.email.equals(that.email);
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return Objects.hash(this.email);
     }
 }

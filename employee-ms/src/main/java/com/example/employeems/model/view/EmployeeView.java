@@ -1,6 +1,5 @@
 package com.example.employeems.model.view;
 
-import com.example.employeems.model.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +12,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeView {
-    private  Long id;
-    private  String firstName;
-    private  String lastName;
-    private  Gender gender;
-    private  LocalDate birthDate;
-    private  String phoneNumber;
-    private  String address;
-    private  Double salary;
-    private  Long positionId;
+
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private LocalDate birthDate;
+    private String email;
+    private String phoneNumber;
+    private String address;
+    private Double salary;
+    private PositionView position;
 }

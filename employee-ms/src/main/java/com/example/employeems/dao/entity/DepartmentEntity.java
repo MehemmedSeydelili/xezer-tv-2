@@ -17,15 +17,16 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "departments")
 public class DepartmentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    //departments positionuna acces
+
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
-
-    private Set<PositionEntity> entities;
+    private Set<PositionEntity> positions;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
@@ -43,12 +44,12 @@ public class DepartmentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DepartmentEntity that = (DepartmentEntity) o;
-        return id.equals(that.id);
+        return this.name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.name);
     }
 }
 

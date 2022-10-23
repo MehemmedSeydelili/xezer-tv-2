@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "experiences")
@@ -36,14 +37,6 @@ public class ExperienceEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -51,11 +44,11 @@ public class ExperienceEntity {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
             return false;
         ExperienceEntity that = (ExperienceEntity) o;
-        return id != null && id.equals(that.id);
+        return this.workplace.equals(that.workplace) && this.position.equals(that.position);
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return Objects.hash(this.workplace, this.position);
     }
 }

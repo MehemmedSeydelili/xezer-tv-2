@@ -19,7 +19,7 @@ public class ExperienceController {
 
     @GetMapping("/{employeeId}")
     public List<ExperienceEntity> getAllExperiences(@PathVariable(name = "employeeId") Long employeeId) {
-        return service.getAllExperiences(employeeId);
+        return service.getExperiencesByEmployee(employeeId);
     }
 
     @PostMapping("/{employeeId}")
@@ -32,7 +32,7 @@ public class ExperienceController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ExperienceEntity updateExperience(@PathVariable(value = "id") Long id,
-                                             @RequestBody ExperienceDto experience) {
+                                             @Valid @RequestBody ExperienceDto experience) {
         return service.updateExperience(id, experience);
     }
 
