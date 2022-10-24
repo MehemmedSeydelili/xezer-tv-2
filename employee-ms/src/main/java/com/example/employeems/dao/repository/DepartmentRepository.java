@@ -1,6 +1,7 @@
 package com.example.employeems.dao.repository;
 
 import com.example.employeems.dao.entity.DepartmentEntity;
+import com.example.employeems.dao.entity.PositionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,6 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Lo
     List<DepartmentEntity> findAllByDeletedIsFalse();
 
     Optional<DepartmentEntity> findByIdAndIsDeletedFalse(Long id);
+
+
 }

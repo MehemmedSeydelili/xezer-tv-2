@@ -63,7 +63,7 @@ public class DepartmentService {
     }
 
 
-    private DepartmentEntity fetcDepartmentIfExist(Long id) {
+    DepartmentEntity fetcDepartmentIfExist(Long id) {
         return repository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> {
                     log.error("DepartmentService.fetcDepartmentIfExist.error id: {}", id);

@@ -26,7 +26,7 @@ public class PositionEntity {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private DepartmentEntity department;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<EmployeeEntity> employees;
 
