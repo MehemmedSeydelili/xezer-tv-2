@@ -1,9 +1,7 @@
 package com.example.employeems.service;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
-import com.example.employeems.dao.entity.PositionEntity;
 import com.example.employeems.dao.repository.EmployeeRepository;
-import com.example.employeems.dao.repository.PositionRepository;
 import com.example.employeems.mapper.EmployeeMapper;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.exception.NotFoundException;
@@ -12,9 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
-import static com.example.employeems.model.constant.ExceptionConstants.*;
+import static com.example.employeems.model.constant.ExceptionConstants.EMPLOYEE_NOT_FOUND_CODE;
+import static com.example.employeems.model.constant.ExceptionConstants.EMPLOYEE_NOT_FOUND_MESSAGE;
 
 @Service
 @RequiredArgsConstructor
@@ -22,34 +21,44 @@ import static com.example.employeems.model.constant.ExceptionConstants.*;
 public class EmployeeService {
 
     private final EmployeeRepository repository;
-    private final PositionRepository positionRepository;
+    private final PositionService positionService;
 
 
     public EmployeeView getEmployee(Long id) {
         return EmployeeMapper.entityToView(fetchEmployeeIfExist(id));
     }
 
-    public Set<EmployeeView> getAllEmployees() {
-        Set<EmployeeEntity> employees = repository.findAllByDeletedIsFalse();
-        return EmployeeMapper.entityToViewList(employees);
+    public List<EmployeeView> getAllEmployees() {
+        var employeeList = repository.findAllByDeletedIsFalse();
+        if (employeeList.isEmpty()) {
+            throw new NotFoundException(EMPLOYEE_NOT_FOUND_CODE, "There are not any employee!");
+        }
+        return EmployeeMapper.entityToViewList(employeeList);
     }
 
-//    public EmployeeView createEmployee(EmployeeDto employeeDto) {
-//
-//        PositionEntity position = positionRepository.findById(employeeDto.getPositionId()).orElseThrow(() -> {
-//            throw new NotFoundException(POSITION_NOT_FOUND_CODE, String.format(POSITION_NOT_FOUND_MESSAGE));
-//        });
-//
-//        EmployeeEntity employees = EmployeeMapper.dtoToEntity(employeeDto);
-//        employees.setPosition(position);
-//        repository.save(employees);
-//
-//        return EmployeeMapper.entityToView(employees);
-//    }
+    public EmployeeView createEmployee(EmployeeDto employeeDto) {
+        var position = positionService.fetchPositionIfExists(employeeDto.getPosition().getId());
+        var employee = EmployeeMapper.dtoToEntity(employeeDto);
+        employee.setPosition(position);
+        repository.save(employee);
+        return EmployeeMapper.entityToView(employee);
+    }
 
-    public EmployeeView updateEmployee(Long id, EmployeeDto employeeDto) {
+    public EmployeeView updateEmployee(Long id, EmployeeDto dto) {
+        var employee = fetchEmployeeIfExist(id);
+        var position = positionService.fetchPositionIfExists(dto.getPosition().getId());
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+        employee.setGender(dto.getGender());
+        employee.setBirthDate(dto.getBirthDate());
+        employee.setEmail(dto.getEmail());
+        employee.setPhoneNumber(dto.getPhoneNumber());
+        employee.setAddress(dto.getAddress());
+        employee.setSalary(dto.getSalary());
+        employee.setPosition(position);
+        repository.save(employee);
 
-        return null;
+        return EmployeeMapper.entityToView(employee);
     }
 
     public void deleteEmployee(Long id) {
@@ -64,5 +73,6 @@ public class EmployeeService {
             throw new NotFoundException(EMPLOYEE_NOT_FOUND_CODE, String.format(EMPLOYEE_NOT_FOUND_MESSAGE, id));
         });
     }
+
 }
 

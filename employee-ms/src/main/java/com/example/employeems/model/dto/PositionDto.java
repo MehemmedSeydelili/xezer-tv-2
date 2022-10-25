@@ -1,17 +1,19 @@
 package com.example.employeems.model.dto;
 
-import lombok.AllArgsConstructor;
+import com.example.employeems.model.view.DepartmentView;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Data
-public class PositionDto{
+public class PositionDto {
 
-    @NotEmpty(message = "Position name can't be empty")
+    @NotBlank(message = "Position name can't be empty")
     private String name;
+
+    @NotNull(message = "Department must not be null")
+    private DepartmentView department;
 
 }

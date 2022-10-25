@@ -44,17 +44,18 @@ public class PositionService {
         return PositionMapper.entitiesToViewList(positionList);
     }
 
-    public void createPosition(Long departmentId, PositionDto dto) {
-        var department = departmentService.fetcDepartmentIfExist(departmentId);
+    public void createPosition(PositionDto dto) {
+        var department = departmentService.fetcDepartmentIfExist(dto.getDepartment().getId());
         var position = PositionMapper.dtoToEntity(dto);
         position.setDepartment(department);
-        position.setIsDeleted(false);
         repository.save(position);
     }
 
-    public PositionView updatePosition(Long id, PositionDto positionDto) {
+    public PositionView updatePosition(Long id, PositionDto dto) {
         var position = fetchPositionIfExists(id);
-        position.setName(positionDto.getName());
+        var department = departmentService.fetcDepartmentIfExist(dto.getDepartment().getId());
+        position.setName(dto.getName());
+        position.setDepartment(department);
         repository.save(position);
         return PositionMapper.entityToView(position);
     }
@@ -65,7 +66,7 @@ public class PositionService {
         repository.save(position);
     }
 
-    private PositionEntity fetchPositionIfExists(Long id) {
+    PositionEntity fetchPositionIfExists(Long id) {
 
         return repository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> {

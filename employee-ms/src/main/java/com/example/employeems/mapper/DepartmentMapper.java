@@ -23,6 +23,7 @@ public class DepartmentMapper {
                 .build();
     }
 
+
     public static List<DepartmentView> entitiesToViewList(List<DepartmentEntity> entities) {
         return entities.stream()
                 .map(DepartmentMapper::entityToView)

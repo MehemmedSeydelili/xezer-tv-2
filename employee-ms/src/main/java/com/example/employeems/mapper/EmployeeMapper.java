@@ -4,42 +4,44 @@ import com.example.employeems.dao.entity.EmployeeEntity;
 import com.example.employeems.model.dto.EmployeeDto;
 import com.example.employeems.model.view.EmployeeView;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmployeeMapper {
 
-    public static EmployeeEntity dtoToEntity(EmployeeDto employeeDto) {
+    public static EmployeeEntity dtoToEntity(EmployeeDto dto) {
         return EmployeeEntity.builder()
-                .firstName(employeeDto.getFirstName())
-                .lastName(employeeDto.getLastName())
-                .gender(employeeDto.getGender())
-                .birthDate(employeeDto.getBirthDate())
-                .email(employeeDto.getEmail())
-                .phoneNumber(employeeDto.getPhoneNumber())
-                .address(employeeDto.getAddress())
-                .salary(employeeDto.getSalary())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .gender(dto.getGender())
+                .birthDate(dto.getBirthDate())
+                .email(dto.getEmail())
+                .phoneNumber(dto.getPhoneNumber())
+                .address(dto.getAddress())
+                .salary(dto.getSalary())
+                .isDeleted(false)
                 .build();
     }
 
-    public static EmployeeView entityToView(EmployeeEntity employee) {
+    public static EmployeeView entityToView(EmployeeEntity entity) {
         return EmployeeView.builder()
-                .id(employee.getId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .gender(employee.getGender())
-                .birthDate(employee.getBirthDate())
-                .email(employee.getEmail())
-                .phoneNumber(employee.getPhoneNumber())
-                .address(employee.getAddress())
-                .salary(employee.getSalary())
+                .id(entity.getId())
+                .firstName(entity.getFirstName())
+                .lastName(entity.getLastName())
+                .gender(entity.getGender())
+                .birthDate(entity.getBirthDate())
+                .email(entity.getEmail())
+                .phoneNumber(entity.getPhoneNumber())
+                .address(entity.getAddress())
+                .salary(entity.getSalary())
+                .position(PositionMapper.entityToView(entity.getPosition()))
                 .build();
 
     }
 
-    public static Set<EmployeeView> entityToViewList(Set<EmployeeEntity> entities) {
+    public static List<EmployeeView> entityToViewList(List<EmployeeEntity> entities) {
         return entities.stream()
                 .map(EmployeeMapper::entityToView)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

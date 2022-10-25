@@ -12,8 +12,8 @@ import java.util.Set;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 
-    @Query(nativeQuery = true, value = "select * from employees where is_deleted false")
-    Set<EmployeeEntity> findAllByDeletedIsFalse();
+    @Query(nativeQuery = true, value = "select * from employees where is_deleted= false")
+    List<EmployeeEntity> findAllByDeletedIsFalse();
 
     Optional<EmployeeEntity> findByIdAndIsDeletedFalse(Long id);
 }

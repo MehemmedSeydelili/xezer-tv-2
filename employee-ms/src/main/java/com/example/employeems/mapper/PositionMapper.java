@@ -12,6 +12,7 @@ public class PositionMapper {
     public static PositionEntity dtoToEntity(PositionDto dto) {
         return PositionEntity.builder()
                 .name(dto.getName())
+                .isDeleted(false)
                 .build();
     }
 

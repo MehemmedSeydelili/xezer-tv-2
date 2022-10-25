@@ -1,6 +1,7 @@
 package com.example.employeems.model.dto;
 
 import com.example.employeems.dao.entity.EmployeeEntity;
+import com.example.employeems.model.view.PositionView;
 import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -27,7 +28,6 @@ public class EmployeeDto {
     private final String gender;
 
     @NotNull(message = "Birth date can't be null")
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
     private final LocalDate birthDate;
 
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
@@ -37,12 +37,15 @@ public class EmployeeDto {
     @Pattern(regexp = "^[0-9]{5}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}$")
     private final String phoneNumber;
 
-    @NotNull(message = "Address can't be null")
+    @NotBlank(message = "Address must not be null and must contain at least one non-whitespace character")
     private final String address;
 
     @NotNull(message = "Salary can't be null")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     private final Double salary;
+
+    @NotNull(message = "Position must not be null")
+    private final PositionView position;
 
 
 }

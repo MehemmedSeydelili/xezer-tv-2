@@ -32,10 +32,10 @@ public class PositionController {
         return service.getPosition(id);
     }
 
-    @PostMapping("/{departmentId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPosition(@PathVariable(name = "departmentId") Long departmentId, @Valid @RequestBody PositionDto positionDto) {
-        service.createPosition(departmentId, positionDto);
+    public void createPosition(@Valid @RequestBody PositionDto positionDto) {
+        service.createPosition(positionDto);
     }
 
     @PutMapping("/{id}")
